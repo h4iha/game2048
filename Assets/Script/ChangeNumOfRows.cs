@@ -12,28 +12,29 @@ public class ChangeNumOfRows : MonoBehaviour
 
     void Start()
     {
-        numberOfRows = 4;
+        if (numberOfRows < 4)
+            numberOfRows = 4;
+        if (numberOfRows > 8)
+            numberOfRows = 8;
         displayNxN.text = numberOfRows.ToString() + "x" + numberOfRows.ToString();
     }
     public void PlusNumOfRows()
     {
-        numberOfRows++;
-        if (numberOfRows > 8 || numberOfRows == null)
-        {
+        if (numberOfRows <= 7)
+            numberOfRows++;
+        else
             numberOfRows = 8;
-            displayNxN.text = numberOfRows.ToString() + "x" + numberOfRows.ToString();
-        }
         displayNxN.text = numberOfRows.ToString() + "x" + numberOfRows.ToString();
+
+
     }
     public void MinusNumOfRows()
     {
-        numberOfRows--;
-        if (numberOfRows < 4 || numberOfRows == null)
-        {
+        if (numberOfRows >=5)
+            numberOfRows--;
+        else
             numberOfRows = 4;
-            displayNxN.text = numberOfRows.ToString() + "x" + numberOfRows.ToString();
-        }
         displayNxN.text = numberOfRows.ToString() + "x" + numberOfRows.ToString();
-        
+
     }
 }
