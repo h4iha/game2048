@@ -8,7 +8,7 @@ public class ChangeNumOfRows : MonoBehaviour
     // Start is called before the first frame update
     
     public static int numberOfRows;
-    public Text displayNxN;
+    [SerializeField] Text displayNxN;
 
     void Start()
     {

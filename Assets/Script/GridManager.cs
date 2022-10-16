@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class GridManager : MonoBehaviour
 {
-    public GridLayoutGroup gridGame;
-    public GameObject cellGO;
+    [SerializeField] GridLayoutGroup gridGame;
+    [SerializeField] GameObject cellGO;
 
     void Start()
     {
