@@ -1342,7 +1342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridGame: {fileID: 1297376149}
-  tilePrefab: {fileID: 1903321495374046904, guid: cddd52394620dcb4ca0e8be8e16121e7, type: 3}
+  cellPrefab: {fileID: 1903321495374046904, guid: cddd52394620dcb4ca0e8be8e16121e7, type: 3}
 --- !u!114 &1297376149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1379,7 +1379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de1af761220559c4b87474a33b76ecb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cellPrefab: {fileID: 5238825652852681623, guid: 5182883ce39acc7489d7909ac7c06fa0, type: 3}
+  fillPrefab: {fileID: 5238825652852681623, guid: 5182883ce39acc7489d7909ac7c06fa0, type: 3}
 --- !u!1 &1457552529
 GameObject:
   m_ObjectHideFlags: 0

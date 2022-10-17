@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class GridManager : MonoBehaviour
 {
     [SerializeField] GridLayoutGroup gridGame;
-    [SerializeField] GameObject tilePrefab;
+    [SerializeField] GameObject cellPrefab;
 
     void Start()
     {
@@ -34,7 +34,7 @@ public class GridManager : MonoBehaviour
         {
             for (int j = 0; j < numOfRows; j++)
             {
-                GameObject newCellGO = Instantiate(tilePrefab, transform);
+                GameObject newCellGO = Instantiate(cellPrefab, transform);
                 newCellGO.name = (i * numOfRows + j).ToString();
             }
         }

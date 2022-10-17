@@ -6,41 +6,42 @@ using System;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] GameObject cellPrefab;
+    [SerializeField] GameObject fillPrefab;
+    public static Action<string> actionKeycode;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.KeypadEnter))
         {
-            SpawnCell();
+            SpawnFill();
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            SpawnCell();
+            actionKeycode("UpArrow");
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            SpawnCell();
+            actionKeycode("RightArrow");
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            SpawnCell();
+            actionKeycode("LeftArrow");
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            SpawnCell();
+            actionKeycode("DownArrow");
         }
     }
 
 
-    void SpawnCell()
+    void SpawnFill()
     {
         // Tao ra cac cell ngau nhien
-        Transform[] allCells = this.transform.GetComponentsInChildren<Transform>();
-        int posSpawn = UnityEngine.Random.Range(0, allCells.Length);
-        if (allCells[posSpawn].childCount != 0)
+        Transform[] allFills = this.transform.GetComponentsInChildren<Transform>();
+        int posSpawn = UnityEngine.Random.Range(0, allFills.Length);
+        if (allFills[posSpawn].childCount != 0)
         {
-            SpawnCell();
+            SpawnFill();
             return;
         }
 
@@ -51,13 +52,13 @@ public class GameController : MonoBehaviour
         }
         else if(chance < 80)
         {
-            GameObject tempCell = Instantiate(cellPrefab, allCells[posSpawn]);
-            tempCell.name = allCells[posSpawn].name;
+            GameObject tempCell = Instantiate(fillPrefab, allFills[posSpawn]);
+            tempCell.name = allFills[posSpawn].name;
         }
         else
         {
-            GameObject tempCell = Instantiate(cellPrefab, allCells[posSpawn]);
-            tempCell.name = allCells[posSpawn].name;
+            GameObject tempCell = Instantiate(fillPrefab, allFills[posSpawn]);
+            tempCell.name = allFills[posSpawn].name;
         }
     }
 }
