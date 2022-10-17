@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class GridManager : MonoBehaviour
 {
     [SerializeField] GridLayoutGroup gridGame;
-    [SerializeField] GameObject cellGO;
+    [SerializeField] GameObject tilePrefab;
 
     void Start()
     {
@@ -19,6 +19,7 @@ public class GridManager : MonoBehaviour
 
     void calculateSpacingAndCellSizeGridLG(int numOfRows)
     {
+        // Size cell = 20 Space, Space 1024/ (20 * Space
         float spacing = 1024 / (float)(21 * numOfRows + 1);
         gridGame.cellSize = new Vector2(20*spacing, 20*spacing);
         gridGame.spacing = new Vector2(spacing, spacing);
@@ -33,8 +34,8 @@ public class GridManager : MonoBehaviour
         {
             for (int j = 0; j < numOfRows; j++)
             {
-                GameObject newCellGO = Instantiate(cellGO, transform);
-                newCellGO.name = i.ToString() + ":" + j.ToString();
+                GameObject newCellGO = Instantiate(tilePrefab, transform);
+                newCellGO.name = (i * numOfRows + j).ToString();
             }
         }
     }

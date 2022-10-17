@@ -896,7 +896,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &865620330
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1108,7 +1108,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 8x8
+  m_Text: 4x4
 --- !u!222 &904185780
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1301,9 +1301,10 @@ GameObject:
   - component: {fileID: 1297376147}
   - component: {fileID: 1297376149}
   - component: {fileID: 1297376148}
+  - component: {fileID: 1297376150}
   m_Layer: 5
   m_Name: Board
-  m_TagString: Untagged
+  m_TagString: Board
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1341,7 +1342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridGame: {fileID: 1297376149}
-  cellGO: {fileID: 1903321495374046904, guid: cddd52394620dcb4ca0e8be8e16121e7, type: 3}
+  tilePrefab: {fileID: 1903321495374046904, guid: cddd52394620dcb4ca0e8be8e16121e7, type: 3}
 --- !u!114 &1297376149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1366,6 +1367,19 @@ MonoBehaviour:
   m_Spacing: {x: 12, y: 12}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &1297376150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1297376146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de1af761220559c4b87474a33b76ecb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cellPrefab: {fileID: 5238825652852681623, guid: 5182883ce39acc7489d7909ac7c06fa0, type: 3}
 --- !u!1 &1457552529
 GameObject:
   m_ObjectHideFlags: 0
