@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using System;
 
 public class GameController : MonoBehaviour
 {
     [SerializeField] GameObject fillPrefab;
-    public static Action<string> actionKeycode;
+    [SerializeField] GameObject gridGame;
+    public static Action<string> Slide;
 
     void Update()
     {
@@ -17,19 +17,19 @@ public class GameController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            actionKeycode("UpArrow");
+            Slide("UpArrow");
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            actionKeycode("RightArrow");
+            Slide("RightArrow");
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            actionKeycode("LeftArrow");
+            Slide("LeftArrow");
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            actionKeycode("DownArrow");
+            Slide("DownArrow");
         }
     }
 
@@ -37,14 +37,13 @@ public class GameController : MonoBehaviour
     void SpawnFill()
     {
         // Tao ra cac cell ngau nhien
-        Transform[] allFills = this.transform.GetComponentsInChildren<Transform>();
-        int posSpawn = UnityEngine.Random.Range(0, allFills.Length);
-        if (allFills[posSpawn].childCount != 0)
+        int posSpawn = UnityEngine.Random.Range(0, gridGame.transform.childCount);
+        if (gridGame.gameObject.transform.GetChild(posSpawn).childCount != 0)
         {
+            Debug.Log(gridGame.gameObject.transform.GetChild(posSpawn).name + " is already filled");
             SpawnFill();
             return;
         }
-
         int chance = UnityEngine.Random.Range(0, 100);
         if (chance < 20)
         {
@@ -52,13 +51,15 @@ public class GameController : MonoBehaviour
         }
         else if(chance < 80)
         {
-            GameObject tempCell = Instantiate(fillPrefab, allFills[posSpawn]);
-            tempCell.name = allFills[posSpawn].name;
+            GameObject tempFill = Instantiate(fillPrefab, gridGame.gameObject.transform.GetChild(posSpawn));
+            Fill2048 tempFillComponent = tempFill.GetComponent<Fill2048>();
+            tempFillComponent.FillValueUpdate(2);
         }
         else
         {
-            GameObject tempCell = Instantiate(fillPrefab, allFills[posSpawn]);
-            tempCell.name = allFills[posSpawn].name;
+            GameObject tempFill = Instantiate(fillPrefab, gridGame.gameObject.transform.GetChild(posSpawn));
+            Fill2048 tempFillComponent = tempFill.GetComponent<Fill2048>();
+            tempFillComponent.FillValueUpdate(4);
         }
     }
 }
