@@ -33,9 +33,9 @@ public class Cell2048 : MonoBehaviour
     }
     private void OnSlide(string WhatKeyWasSent)
     {
+        CellCheck();
         if (WhatKeyWasSent == "UpArrow")
         {
-            //GameObject currentGO = gridGame.gameObject.transform.GetChild(index).gameObject;
             if (up != null)
                 return;
             Cell2048 currentCell = this;
@@ -62,11 +62,16 @@ public class Cell2048 : MonoBehaviour
             Cell2048 currentCell = this;
             SlideLeft(currentCell);
         }
-
+        GameController.ticker++;
+        if (GameController.ticker == 4)
+        {
+            GameController.instance.SpawnFill();    
+        }
     }
 
     void SlideUp(Cell2048 currentCell)
     {
+
         if (currentCell.down == null)
             return;
         if (currentCell.fill != null)
@@ -81,7 +86,7 @@ public class Cell2048 : MonoBehaviour
             {
                 if (currentCell.fill.value == nextCell.fill.value)
                 {
-                    //nextCell.fill.Double();
+                    nextCell.fill.Double();
                     nextCell.fill.transform.parent = currentCell.transform;
                     currentCell.fill = nextCell.fill;
                     nextCell.fill = null;
@@ -116,7 +121,6 @@ public class Cell2048 : MonoBehaviour
             return;
         SlideUp(currentCell.down);
     }
-
     void SlideRight(Cell2048 currentCell)
     {
         if (currentCell.left == null)
@@ -133,7 +137,7 @@ public class Cell2048 : MonoBehaviour
             {
                 if (currentCell.fill.value == nextCell.fill.value)
                 {
-                    //nextCell.fill.Double();
+                    nextCell.fill.Double();
                     nextCell.fill.transform.parent = currentCell.transform;
                     currentCell.fill = nextCell.fill;
                     nextCell.fill = null;
@@ -184,7 +188,7 @@ public class Cell2048 : MonoBehaviour
             {
                 if (currentCell.fill.value == nextCell.fill.value)
                 {
-                    //nextCell.fill.Double();
+                    nextCell.fill.Double();
                     nextCell.fill.transform.parent = currentCell.transform;
                     currentCell.fill = nextCell.fill;
                     nextCell.fill = null;
@@ -193,7 +197,7 @@ public class Cell2048 : MonoBehaviour
                 {
                     Debug.Log("!doubled");
                     nextCell.fill.transform.parent = currentCell.up.transform;
-                    currentCell.left.fill = nextCell.fill;
+                    currentCell.up.fill = nextCell.fill;
                     nextCell.fill = null;
                 }
             }
@@ -226,7 +230,7 @@ public class Cell2048 : MonoBehaviour
         if (currentCell.fill != null)
         {
             Cell2048 nextCell = currentCell.right;
-            while (nextCell.left != null && nextCell.fill == null)
+            while (nextCell.right != null && nextCell.fill == null)
             {
                 Debug.Log("Loop");
                 nextCell = nextCell.right;
@@ -235,7 +239,7 @@ public class Cell2048 : MonoBehaviour
             {
                 if (currentCell.fill.value == nextCell.fill.value)
                 {
-                    //nextCell.fill.Double();
+                    nextCell.fill.Double();
                     nextCell.fill.transform.parent = currentCell.transform;
                     currentCell.fill = nextCell.fill;
                     nextCell.fill = null;
@@ -270,7 +274,42 @@ public class Cell2048 : MonoBehaviour
             return;
         SlideLeft(currentCell.right);
     }
+    void CellCheck()
+    {
 
+        if (fill == null)
+            return;
+        if (up != null)
+        {
+            if (up.fill == null)
+                return;
+            if (up.fill.value == fill.value)
+                return;
+        }
+        if (right != null)
+        {
+            if (right.fill == null)
+                return;
+            if (right.fill.value == fill.value)
+                return;
+        }
+        if (down != null)
+        {
+            if (down.fill == null)
+                return;
+            if (down.fill.value == fill.value)
+                return;
+        }
+        if (left != null)
+        {
+            if (left.fill == null)
+                return;
+            if (left.fill.value == fill.value)
+                return;
+        }
+        Debug.Log("Check");
+        GameController.instance.GameOverCheck();
+    }
     void Start()
     {
         index = transform.GetSiblingIndex();
@@ -281,12 +320,12 @@ public class Cell2048 : MonoBehaviour
         FindDown();
         
     }
-    void Update()
-    {
-        if (fill == this.GetComponentInChildren<Fill2048>())
-            return;
-        fill = this.GetComponentInChildren<Fill2048>();
-    }
+    //void Update()
+    //{
+    //    if (fill == this.GetComponentInChildren<Fill2048>())
+    //        return;
+    //    fill = this.GetComponentInChildren<Fill2048>();
+    //}
     void FindLeft()
     {
         if (index % ChangeNumOfRows.numberOfRows != 0)
