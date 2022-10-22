@@ -17,14 +17,13 @@ public class Fill2048 : MonoBehaviour
 
         int colorIndex = GetColorIndex(value);
         fillImage = GetComponent<Image>();
-
         fillImage.color = GameController.instance.fillColors[colorIndex];
 
     }
     int GetColorIndex(int valueIn)
     {
         int index = 0;
-        while (valueIn != 1)
+        while (valueIn > 1)
         {
             index++;
             valueIn /= 2;
@@ -54,6 +53,9 @@ public class Fill2048 : MonoBehaviour
         GameController.instance.ScoreUpdate(value);
         valueDisplay.text = value.ToString();
         int colorIndex = GetColorIndex(value);
+        Debug.Log("color: " + colorIndex);
         GameController.instance.WinningCheck(value);
+        fillImage = GetComponent<Image>();
+        fillImage.color = GameController.instance.fillColors[colorIndex];
     }
 }
